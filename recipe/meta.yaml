@@ -7,11 +7,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/goodtables-pandas-py-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/goodtables-pandas-py-{{ version }}.tar.gz
   sha256: 194171af746bf96bb2198866b31aa76cd5b4547a77f6dd55d821ad97ef268406
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
@@ -19,11 +19,11 @@ requirements:
   host:
     - pip
     - poetry-core >=1.0.0,<2.0.0
-    - python >=3.6,<4.0
+    - python {{ python_min }}
   run:
     - frictionless >=3.34.0,<4.0.0
     - pandas >=1.1.3,<2.0.0
-    - python >=3.6,<4.0
+    - python >={{ python_min }},<4.0
     - typing-extensions >=3.7.4,<4.0.0
 
 test:
@@ -33,6 +33,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/ezwelty/goodtables-pandas-py
